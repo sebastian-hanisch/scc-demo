@@ -1,5 +1,7 @@
 # Starke Zusammenhangskomponenten – Einbahnstraßen im Netz – Streamlit-Demo
 
+**[→ Demo live ausprobieren](https://sebastianhanisch-scc-demo.streamlit.app/)**
+
 Drittes Stück der **Graphen-und-Netzwerke-Reihe** der "Konzepte"-Reihe für die Website "Sebastian Hanisch – Operations Research und Machine Learning", Kind der Durchmusterung ([bfs-dfs-demo](https://github.com/sebastian-hanisch/bfs-dfs-demo)). Stück 1 und 2 waren ungerichtet; sobald Straßen nur in eine Richtung befahrbar sind, ist "von X aus erreichbar" nicht mehr symmetrisch zu "erreicht X" – man muss auch zurückkommen. Zwei Kreuzungen sind **stark zusammenhängend**, wenn jede die andere erreicht; die **starken Zusammenhangskomponenten (SCC)** zerlegen das Netz eindeutig. Schrumpft man jede SCC zu einem Punkt, bleibt die **Kondensation** übrig – und die ist **immer kreisfrei**, lässt sich also **topologisch sortieren** (eine gültige Abhängigkeitsreihenfolge). Zwei klassische Verfahren finden die SCCs im Vergleich: **Kosaraju** (zwei Tiefensuchen, einmal auf dem umgedrehten Netz) gegen **Tarjan** (eine einzige Tiefensuche mit Low-Link, wie in der Brücken-Demo). Gemessen wird, was das kostet, wie schnell eine große Komponente beim Einbahn-Anteil zerfällt und wie die Kondensation aussieht.
 
 **Einordnung in die Reihe:** die Reihe hat zwölf Stücke, dies ist das dritte (Details in `graphen-planung/PLAN.md` des Portfolio-Ordners):
