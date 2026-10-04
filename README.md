@@ -8,13 +8,13 @@ Drittes Stück der **Graphen-und-Netzwerke-Reihe** der "Konzepte"-Reihe für die
 
 ```
 1 BFS und DFS (Wurzel)                                                        [gebaut: bfs-dfs-demo]
- ├─ 2 Brücken und Artikulationspunkte ─ 4 Euler-Touren                        [gebaut: bridges-demo] [4 nicht gebaut]
+ ├─ 2 Brücken und Artikulationspunkte ─ 4 Euler-Touren                        [gebaut: bridges-demo] [gebaut: euler-tour-demo]
  ├─ 3 Starke Zusammenhangskomponenten, topologische Sortierung                [DIESES STÜCK]
- ├─ 5 Graphfärbung                                                            [nicht gebaut]
- ├─ 6 Zentralität ─ 7 Strukturkennzahlen                                      [nicht gebaut]
- │        ├─ 8 Robustheit ─ 9 Kaskaden und Ausbreitung                        [nicht gebaut]
- │        └─ 10 Kritische Knoten härten                                       [nicht gebaut]
- └─ 11 Bandbreite ─ 12 Bandbreite von G(n,k,b) und Cliquenüberdeckung         [nicht gebaut]
+ ├─ 5 Graphfärbung                                                            [gebaut: graph-coloring-demo]
+ ├─ 6 Zentralität ─ 7 Strukturkennzahlen                                      [gebaut: centrality-demo, strukturkennzahlen-demo]
+ │        ├─ 8 Robustheit ─ 9 Kaskaden und Ausbreitung                        [gebaut: robustheit-demo, kaskaden-demo]
+ │        └─ 10 Kritische Knoten härten                                       [gebaut: haertung-demo]
+ └─ 11 Bandbreite ─ 12 Bandbreite von G(n,k,b) und Cliquenüberdeckung         [gebaut: bandbreite-demo, cliquenbandbreite-demo]
 ```
 
 Ergebnis in Kürze: **Kosaraju kostet per Definition immer genau doppelt so viel wie Tarjan (zwei Tiefensuchen gegen eine); der naive Test (Vorwärts- und Rückwärtserreichbarkeit je Komponente) dagegen wächst mit der Zahl der SCCs – vom 2-fachen bei einer einzigen Komponente auf das 18- bis 37-fache, sobald viele kleine Komponenten entstehen.** Auf einem 20 × 20-Raster übersteht die größte Komponente bis etwa 20 % Einbahn-Anteil praktisch unbeschadet (100/99/97 % der Knoten bei 30/40/50 %), bricht danach unregelmäßig ein (91/82/46/26 % bei 70/80/90/100 %). Ein Zufallsgraph gleicher Bogenzahl verliert seine große Komponente bei mittleren Anteilen schneller als das Raster (80 statt 97 % bei 50 %) – dreht das Bild aber bei vollständiger Einbahnregelung um: dort hält der Zufallsgraph mit 57 % deutlich mehr zusammen als das Raster mit nur 26 %.
@@ -32,7 +32,7 @@ Abgrenzung: die **gerichtete Spannbaum-Demo** (Spannbaum-Reihe) streift Einbahn-
 | **H1** Kosaraju und Tarjan finden dieselbe SCC-Partition; Kosaraju kostet immer doppelt so viel wie Tarjan. | ✅ Bestätigt (Satz, im Test gegen networkx auf über 300 Instanzen; das Verhältnis ist exakt 2, eine Eigenschaft des Zählmaßes, kein überraschender Befund). |
 | **H2** Bei Einbahn-Anteil 0 zerfällt das Netz in viele triviale (einzelne) SCCs, weil es "eigentlich ungerichtet" ist. | ❌ **Widerlegt – bewusst als Falle geprüft:** jede ungerichtete Straße wird zu *zwei* Bögen (hin und zurück), das erzeugt sofort einen Zyklus zwischen den Endpunkten. Bei Einbahn-Anteil 0 ist die ganze (ungerichtete) Komponente eine **einzige** starke Zusammenhangskomponente, nicht mehrere kleine – das Gegenteil der naiven Erwartung, als Test festgeschrieben (`test_zero_oneway_grid_is_one_scc`). |
 | **H3** Die größte SCC zerfällt gleichmäßig mit steigendem Einbahn-Anteil. | ❌ **Widerlegt:** sie bleibt bis etwa 20 % Einbahn-Anteil bei 100 % der Knoten (einzelne fehlende Rückwege stören den starken Zusammenhang kaum), bricht dann uneinheitlich ein: 91/82/46/26 % bei 70/80/90/100 % – ab etwa 90 % schwanken die Werte stark zwischen den fünf festen Instanzen. |
-| **H4** Der Zufallsgraph gleicher Bogenzahl verliert seine große SCC bei jedem Einbahn-Anteil schneller als das Raster (im Raster halten viele kurze lokale Kreisläufe Rückwege offen). | ⚠ **Nur teilweise:** bei mittleren Anteilen stimmt es (50 %: 80 gegen 97 %; 70 %: 57 gegen 91 %), aber bei vollständiger Einbahnregelung dreht sich das Bild um – der Zufallsgraph hält mit 57 % deutlich mehr zusammen als das Raster mit nur 26 %. Dort brechen die vielen kurzen Rasterkreisläufe alle gleichzeitig weg, während der Zufallsgraph zufällig verteilte Rückwege behält. |
+| **H4** Der Zufallsgraph gleicher Bogenzahl verliert seine große SCC bei jedem Einbahn-Anteil schneller als das Raster (im Raster halten viele kurze lokale Kreisläufe Rückwege offen). | ⚠ **Nur teilweise:** bei mittleren Anteilen stimmt es (50 %: 87 gegen 97 %; 70 %: 80 gegen 91 %), aber bei vollständiger Einbahnregelung dreht sich das Bild um – der Zufallsgraph hält mit 57 % deutlich mehr zusammen als das Raster mit nur 26 %. Dort brechen die vielen kurzen Rasterkreisläufe alle gleichzeitig weg, während der Zufallsgraph zufällig verteilte Rückwege behält. |
 | **H5** Der naive Test (Vorwärts- und Rückwärtserreichbarkeit je Komponente) ist eine brauchbare Referenz, solange es wenige SCCs gibt, wird aber mit vielen kleinen SCCs schnell teuer. | ✅ Bestätigt: bei einer einzigen SCC kostet er nur das 2-fache von Tarjan (Vorwärts- plus Rückwärtssuche), bei 70 % Einbahn-Anteil das 18-fache, bei 90 % das 37-fache (n = 196). |
 | **H6** Die Kondensation bleibt klein, solange es wenige SCCs gibt. | ✅ Bestätigt: bei 10/30/50/70/90 % Einbahn-Anteil hat die Kondensation 1/2/11/33/111 Knoten und 0/1/12/53/228 Kanten (Raster 20 × 20) – solange es nur eine SCC gibt, ist die Kondensation ein einzelner Punkt ohne Kante. |
 
@@ -124,3 +124,7 @@ venv\Scripts\streamlit run app.py
 - Kahn, A. B. (1962). *Topological sorting of large networks.* Communications of the ACM 5(11), 558–562.
 
 Gebaut mit Streamlit, Plotly, NumPy und pandas.
+
+---
+
+Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – Operations Research und Machine Learning ([Über mich](https://sebastianhanisch.net/ueber-mich.html)). Mehr zur Reihe: [Graphen und Netzwerke: BFS bis Cliquenbandbreite](https://sebastianhanisch.net/konzepte-graphen-netzwerke.html).

@@ -71,7 +71,7 @@ was das kostet, wie schnell eine große Komponente beim Einbahn-Anteil zerfällt
 """
 )
 st.caption(
-    "Kind der BFS-und-DFS-Demo (drittes Stück der Graphen-und-Netzwerke-Reihe); geplante Nachfolger (nicht gebaut): Graphfärbung, Zentralität, Robustheit, Kaskaden, kritische Knoten härten, Bandbreite. "
+    "Kind der BFS-und-DFS-Demo (drittes Stück der Graphen-und-Netzwerke-Reihe); weitere Stücke der Reihe (alle gebaut): Euler-Touren, Graphfärbung, Zentralität, Robustheit, Kaskaden, kritische Knoten härten, Bandbreite. "
     "Die gerichtete Spannbaum-Demo (Spannbaum-Reihe) streift Einbahn-Trassen und Kreise nur am Rand, ohne Kondensation oder topologische Sortierung selbst zu zeigen."
 )
 
@@ -299,6 +299,6 @@ Implementiert in `scc_algorithm.py` (Kosaraju, Tarjan, naiver Test, Kondensation
 st.markdown("---")
 st.caption(
     "Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – "
-    "Operations Research und Machine Learning. Interesse an einer maßgeschneiderten Lösung für "
-    "Ihr Unternehmen? [Kontakt aufnehmen](https://sebastianhanisch.net/kontakt.html)"
+    "Operations Research und Machine Learning ([Über mich](https://sebastianhanisch.net/ueber-mich.html)). "
+    "Mehr zur Reihe: [Graphen und Netzwerke: BFS bis Cliquenbandbreite](https://sebastianhanisch.net/konzepte-graphen-netzwerke.html)."
 )
