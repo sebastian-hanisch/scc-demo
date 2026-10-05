@@ -4,7 +4,7 @@
 
 Drittes Stück der **Graphen-und-Netzwerke-Reihe** der "Konzepte"-Reihe für die Website "Sebastian Hanisch – Operations Research und Machine Learning", Kind der Durchmusterung ([bfs-dfs-demo](https://github.com/sebastian-hanisch/bfs-dfs-demo)). Stück 1 und 2 waren ungerichtet; sobald Straßen nur in eine Richtung befahrbar sind, ist "von X aus erreichbar" nicht mehr symmetrisch zu "erreicht X" – man muss auch zurückkommen. Zwei Kreuzungen sind **stark zusammenhängend**, wenn jede die andere erreicht; die **starken Zusammenhangskomponenten (SCC)** zerlegen das Netz eindeutig. Schrumpft man jede SCC zu einem Punkt, bleibt die **Kondensation** übrig – und die ist **immer kreisfrei**, lässt sich also **topologisch sortieren** (eine gültige Abhängigkeitsreihenfolge). Zwei klassische Verfahren finden die SCCs im Vergleich: **Kosaraju** (zwei Tiefensuchen, einmal auf dem umgedrehten Netz) gegen **Tarjan** (eine einzige Tiefensuche mit Low-Link, wie in der Brücken-Demo). Gemessen wird, was das kostet, wie schnell eine große Komponente beim Einbahn-Anteil zerfällt und wie die Kondensation aussieht.
 
-**Einordnung in die Reihe:** die Reihe hat zwölf Stücke, dies ist das dritte (Details in `graphen-planung/PLAN.md` des Portfolio-Ordners):
+**Einordnung in die Reihe:** die Reihe hat dreizehn Stücke (zwölf davon im Baum unten, dazu die Analyse-Karte `interne-verlinkung-demo`), dies ist das dritte des Baums (Details in `graphen-planung/PLAN.md` des Portfolio-Ordners):
 
 ```
 1 BFS und DFS (Wurzel)                                                        [gebaut: bfs-dfs-demo]
@@ -17,7 +17,7 @@ Drittes Stück der **Graphen-und-Netzwerke-Reihe** der "Konzepte"-Reihe für die
  └─ 11 Bandbreite ─ 12 Bandbreite von G(n,k,b) und Cliquenüberdeckung         [gebaut: bandbreite-demo, cliquenbandbreite-demo]
 ```
 
-Ergebnis in Kürze: **Kosaraju kostet per Definition immer genau doppelt so viel wie Tarjan (zwei Tiefensuchen gegen eine); der naive Test (Vorwärts- und Rückwärtserreichbarkeit je Komponente) dagegen wächst mit der Zahl der SCCs – vom 2-fachen bei einer einzigen Komponente auf das 18- bis 37-fache, sobald viele kleine Komponenten entstehen.** Auf einem 20 × 20-Raster übersteht die größte Komponente bis etwa 20 % Einbahn-Anteil praktisch unbeschadet (100/99/97 % der Knoten bei 30/40/50 %), bricht danach unregelmäßig ein (91/82/46/26 % bei 70/80/90/100 %). Ein Zufallsgraph gleicher Bogenzahl verliert seine große Komponente bei mittleren Anteilen schneller als das Raster (80 statt 97 % bei 50 %) – dreht das Bild aber bei vollständiger Einbahnregelung um: dort hält der Zufallsgraph mit 57 % deutlich mehr zusammen als das Raster mit nur 26 %.
+Ergebnis in Kürze: **Kosaraju kostet per Definition immer genau doppelt so viel wie Tarjan (zwei Tiefensuchen gegen eine); der naive Test (Vorwärts- und Rückwärtserreichbarkeit je Komponente) dagegen wächst mit der Zahl der SCCs – vom 2-fachen bei einer einzigen Komponente auf das 18- bis 37-fache, sobald viele kleine Komponenten entstehen.** Auf einem 20 × 20-Raster übersteht die größte Komponente bis etwa 20 % Einbahn-Anteil praktisch unbeschadet (100/99/97 % der Knoten bei 30/40/50 %), bricht danach unregelmäßig ein (91/82/46/26 % bei 70/80/90/100 %). Ein Zufallsgraph gleicher Bogenzahl verliert seine große Komponente bei mittleren Anteilen schneller als das Raster (87 statt 97 % bei 50 %) – dreht das Bild aber bei vollständiger Einbahnregelung um: dort hält der Zufallsgraph mit 57 % deutlich mehr zusammen als das Raster mit nur 26 %.
 
 ## Warum dieses Problem
 
