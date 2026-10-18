@@ -87,7 +87,7 @@ Presets (8), alle mit den Zahlen in ihren Hilfetexten (`tests/test_presets.py`):
 
 ## Tests
 
-`tests/test_algorithm.py` (16: Kosaraju und Tarjan gegen networkx auf über 300 Instanzen, Kondensation azyklisch, topologische Sortierung gültig, die q=0-Falle als Test festgeschrieben, Buchführung), `tests/test_scenario.py`, `tests/test_evaluation.py`, `tests/test_presets.py` (jede Zahl der Hilfetexte), `tests/test_claims.py` (jede README-Zahl über die echten Auswertungsfunktionen), `tests/test_app.py` (40: AppTest – Voreinstellung, jedes Preset, jeder Schritt für jede Instanz, jeden Netztyp und beide Algorithmen, jede Position des Ereignis-Reglers, Randwerte, Permalink-Grenzen, bedingte Regler, Berechnungen auf Abruf, Footer). 76 Tests insgesamt.
+`tests/test_algorithm.py` (16: Kosaraju und Tarjan gegen networkx auf über 300 Instanzen, Kondensation azyklisch, topologische Sortierung gültig, die q=0-Falle als Test festgeschrieben, Buchführung), `tests/test_scenario.py`, `tests/test_evaluation.py`, `tests/test_presets.py` (jede Zahl der Hilfetexte), `tests/test_claims.py` (jede README-Zahl über die echten Auswertungsfunktionen), `tests/test_app.py` (40: AppTest – Voreinstellung, jedes Preset, jeder Schritt für jede Instanz, jeden Netztyp und beide Algorithmen, jede Position des Ereignis-Reglers, Randwerte, Permalink-Grenzen, bedingte Regler, Berechnungen auf Abruf, Footer). 78 Tests insgesamt.
 
 ```
 python -m pytest tests/ -v
